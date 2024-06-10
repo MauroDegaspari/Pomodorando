@@ -1,21 +1,53 @@
+// .classList -> alterar dinamicamente a classe 
+
+
 const html = document.querySelector('html')
 const focobtn = document.querySelector('.app__card-button--foco')
 const curtobtn = document.querySelector('.app__card-button--curto')
 const logobtn = document.querySelector('.app__card-button--longo') 
 const image = document.querySelector('.app__image')
+const titulo = document.querySelector('.app__title')
+
+function alterarContexto(contexto){
+    html.setAttribute('data-contexto', contexto)
+    image.setAttribute('src',`imagens/${contexto}.png`)
+    switch (contexto) {
+        case 'foco':
+            titulo.innerHTML = `Otimize sua produtividade,<br>
+                <strong class="app__title-strong">mergulhe no que importa.</strong>`
+            focobtn.classList.add('active') 
+            curtobtn.classList.remove('active')
+            logobtn.classList.remove('active') 
+            break;
+        case 'descanso-curto':
+            titulo.innerHTML = `Que tal dar uma respirada?<br>
+            <strong class="app__title-strong">Faça uma pausa.</strong>`
+            curtobtn.classList.add('active')
+            focobtn.classList.remove('active')
+            logobtn.classList.remove('active')
+            break;
+
+        case 'descanso-longo':
+            titulo.innerHTML = `Hora de respirar!<br>
+            <strong class="app__title-strong">Faça uma pausa lonja.</strong>` 
+            logobtn.classList.add('active')
+            focobtn.classList.remove('active')
+            curtobtn.classList.remove('active')
+            break;
+        default:
+            break;
+    }
+}
 
 focobtn.addEventListener('click', () =>{
-    html.setAttribute('data-contexto', 'foco')
-    image.setAttribute('src','imagens/foco.png')
+        alterarContexto('foco')
 })
 
 curtobtn.addEventListener('click', () => {
-    html.setAttribute('data-contexto', 'descanso-curto')
-    image.setAttribute('src', 'imagens/descanso-curto.png')
+    alterarContexto('descanso-curto')
 })
 
 logobtn.addEventListener('click', () =>{
-   html.setAttribute('data-contexto','descanso-longo') 
-   image.setAttribute('src','imagens/descanso-longo.png')
+   alterarContexto('descanso-longo')
 })
 
