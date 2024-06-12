@@ -7,6 +7,9 @@ const curtobtn = document.querySelector('.app__card-button--curto')
 const logobtn = document.querySelector('.app__card-button--longo') 
 const image = document.querySelector('.app__image')
 const titulo = document.querySelector('.app__title')
+const playMusic = document.querySelector('#alternar-musica')
+const musica = new Audio('sons/luna-rise-part-one.mp3')
+musica.loop = true
 
 function alterarContexto(contexto){
     html.setAttribute('data-contexto', contexto)
@@ -38,6 +41,14 @@ function alterarContexto(contexto){
             break;
     }
 }
+
+playMusic.addEventListener('change', () => {
+    if(musica.paused){
+        musica.play();
+    }else{
+        musica.pause();
+    }
+})
 
 focobtn.addEventListener('click', () =>{
         alterarContexto('foco')
