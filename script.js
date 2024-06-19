@@ -9,7 +9,11 @@ const image = document.querySelector('.app__image')
 const titulo = document.querySelector('.app__title')
 const playMusic = document.querySelector('#alternar-musica')
 const musica = new Audio('sons/luna-rise-part-one.mp3')
+const btnStart = document.querySelector('#start-pause')
 musica.loop = true
+
+let tempoDescrescente = 5
+let intervalo = null
 
 function alterarContexto(contexto){
     html.setAttribute('data-contexto', contexto)
@@ -62,3 +66,30 @@ logobtn.addEventListener('click', () =>{
    alterarContexto('descanso-longo')
 })
 
+
+//Cronometro
+const contagemRegressica = () => {
+    if(tempoDescrescente <= 0){
+        zerar()
+        alert("tempo finalizado")
+        return
+    }
+
+    tempoDescrescente -= 1
+    console.log('Temporizador: ' + tempoDescrescente)
+}
+
+btnStart.addEventListener('click', iniciarOuPausarContagem)
+
+function iniciarOuPausarContagem(){
+    if(intervalo){
+        zerar()
+        return
+    }
+    intervalo = setInterval(contagemRegressica, 1000);
+}
+
+function zerar(){
+    clearInterval(intervalo)
+    intervalo = null
+}
