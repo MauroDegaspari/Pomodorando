@@ -1,6 +1,5 @@
 // .classList -> alterar dinamicamente a classe 
 
-
 const html = document.querySelector('html')
 const focobtn = document.querySelector('.app__card-button--foco')
 const curtobtn = document.querySelector('.app__card-button--curto')
@@ -8,14 +7,21 @@ const logobtn = document.querySelector('.app__card-button--longo')
 const image = document.querySelector('.app__image')
 const titulo = document.querySelector('.app__title')
 const playMusic = document.querySelector('#alternar-musica')
-const musica = new Audio('sons/luna-rise-part-one.mp3')
 const btnStart = document.querySelector('#start-pause')
+const btnIniciarouPausar = document.querySelector('#start-pause span')
+const tempoTela = document.querySelector('#timer')
+const musica = new Audio('sons/luna-rise-part-one.mp3')
+const audioPlay = new Audio('sons/play.way')
+const audioPause = new Audio('sons/pause.mp3')
+const audioFinal = new Audio('sons/beep.mp3')
+
 musica.loop = true
 
-let tempoDescrescente = 5
+let tempoDescrescente = 1500
 let intervalo = null
 
 function alterarContexto(contexto){
+    mostrarTempo()
     html.setAttribute('data-contexto', contexto)
     image.setAttribute('src',`imagens/${contexto}.png`)
     switch (contexto) {
@@ -55,14 +61,17 @@ playMusic.addEventListener('change', () => {
 })
 
 focobtn.addEventListener('click', () =>{
+        tempoDescrescente = 1500
         alterarContexto('foco')
 })
 
 curtobtn.addEventListener('click', () => {
+    tempoDescrescente = 300
     alterarContexto('descanso-curto')
 })
 
 logobtn.addEventListener('click', () =>{
+    tempoDescrescente = 900
    alterarContexto('descanso-longo')
 })
 
@@ -70,26 +79,41 @@ logobtn.addEventListener('click', () =>{
 //Cronometro
 const contagemRegressica = () => {
     if(tempoDescrescente <= 0){
-        zerar()
+        audioFinal.play()
         alert("tempo finalizado")
+        zerar()
         return
     }
 
     tempoDescrescente -= 1
-    console.log('Temporizador: ' + tempoDescrescente)
+    mostrarTempo()
 }
 
 btnStart.addEventListener('click', iniciarOuPausarContagem)
 
 function iniciarOuPausarContagem(){
     if(intervalo){
+        audioPause.play()
         zerar()
         return
     }
+    audioPlay.play()
     intervalo = setInterval(contagemRegressica, 1000);
+    btnIniciarouPausar.textContent = "Pausar"
+
 }
 
 function zerar(){
     clearInterval(intervalo)
+    btnIniciarouPausar.textContent = "Retomar"
     intervalo = null
 }
+
+function mostrarTempo(){
+    const tempo = new Date(tempoDescrescente * 1000)
+    const tempoFomatado = tempo.toLocaleTimeString('pt-BR', {minute: '2-digit', second: '2-digit'})
+    tempoTela.innerHTML = `${tempoFomatado}`
+}
+
+
+mostrarTempo()
