@@ -9,7 +9,7 @@
   
 #### Imagens
 
-Cadastrando CLIENTE | Pesquisando CLIENTE
+Descanso longo | FOCO
 ------------ | -------------
   ![tela1](https://github.com/MauroDegaspari/Pomodorando/blob/master/pomodorando1.png) | ![tela2](https://github.com/MauroDegaspari/Pomodorando/blob/master/pomodorando2.png)
 
