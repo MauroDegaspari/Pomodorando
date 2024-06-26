@@ -11,7 +11,7 @@
 
 Cadastrando CLIENTE | Pesquisando CLIENTE
 ------------ | -------------
-  ![tela1](https://github.com/MauroDegaspari/REvenda/blob/master/PrintsSistema/dashboardRevenda.png) | ![tela2](https://github.com/MauroDegaspari/REvenda/blob/master/PrintsSistema/cadastroRevenda.png)
+  ![tela1](https://github.com/MauroDegaspari/Pomodorando/blob/master/pomodorando1.png) | ![tela2](https://github.com/MauroDegaspari/Pomodorando/blob/master/pomodorando2.png)
 
 
 ## Cosntruído com:
